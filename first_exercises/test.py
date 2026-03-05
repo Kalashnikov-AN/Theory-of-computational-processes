@@ -9,7 +9,7 @@ from arrays import input_array, sum_square_array, is_multiple_of_3_not_5, count_
 
 
 def test_136d():
-    "Тестирующая функция для функций, решающих задачу 136 д)"
+    """Тестирующая функция для функций, решающих задачу 136 д)"""
     if __name__ == "__main__":
         arr = input_array()
         print(arr)
@@ -22,6 +22,7 @@ def test_136d():
 
 
 def test_178b():
+    """Тестирующая функция для функций, решающих задачу 178 б)"""
     # Положительные числа, кратные 3, но не 5
     assert is_multiple_of_3_not_5(3) == True
     assert is_multiple_of_3_not_5(6) == True
@@ -66,7 +67,7 @@ def test_178b():
 
 
 def test_334a():
-
+    """Тестирующая функция для функций, решающих задачу 334 а)"""
     # Проверка отдельных значений
     assert abs(sum_334a(1, 1) - 0.5) < 1e-9
     assert abs(sum_334a(1, 2) - 0.2) < 1e-9
@@ -95,77 +96,78 @@ def test_334a():
     print("Все тесты пройдены успешно!")
 
 def test_674():
-    # ---------- Тест 1: квадратная матрица 2x2 ----------
+    """Тестирующая функция для функций, решающих задачу 674"""
+    # квадратная матрица 2x2 
     matrix1 = [[1, 2], [3, 4]]
     arr1 = [1, 2]
     expected1 = [[0, 2], [3, 4]]
     result1 = replace_elements_in_matrix(matrix1, arr1)
-    assert result1 == expected1, f"Ошибка в тесте 1: получено {result1}, ожидалось {expected1}"
+    assert result1 == expected1
 
-    # ---------- Тест 2: прямоугольная матрица 2x3 ----------
+    # матрица 2x3
     matrix2 = [[1, 2, 3], [4, 5, 6]]
     arr2 = [2, 4, 6]
     expected2 = [[1, 2, 3], [4, 5, 6]]
     result2 = replace_elements_in_matrix(matrix2, arr2)
-    assert result2 == expected2, f"Ошибка в тесте 2: получено {result2}, ожидалось {expected2}"
+    assert result2 == expected2
 
-    # ---------- Тест 3: матрица из одной строки (1x3) ----------
+    #  матрица из одной строки (1x3)
     matrix3 = [[10, 20, 30]]
     arr3 = [10, 30]
     expected3 = [[0, 20, 0]]
     result3 = replace_elements_in_matrix(matrix3, arr3)
-    assert result3 == expected3, f"Ошибка в тесте 3: получено {result3}, ожидалось {expected3}"
+    assert result3 == expected3
 
-    # ---------- Тест 4: матрица из одного столбца (3x1) ----------
+    #  матрица из одного столбца (3x1)
     matrix4 = [[1], [2], [3]]
     arr4 = [2]
     expected4 = [[1], [2], [3]]  # ни один элемент с чётной суммой не подходит
     result4 = replace_elements_in_matrix(matrix4, arr4)
-    assert result4 == expected4, f"Ошибка в тесте 4: получено {result4}, ожидалось {expected4}"
+    assert result4 == expected4
 
-    # ---------- Тест 5: пустая матрица ----------
+    #  пустая матрица
     matrix5 = []
     arr5 = [1, 2, 3]
     expected5 = []
     result5 = replace_elements_in_matrix(matrix5, arr5)
-    assert result5 == expected5, f"Ошибка в тесте 5: получено {result5}, ожидалось {expected5}"
+    assert result5 == expected5
 
-    # ---------- Тест 6: все чётные элементы заменяются ----------
+    #  все чётные элементы заменяются
     matrix6 = [[1, 2], [3, 4]]
     arr6 = [1, 2, 3, 4]
     expected6 = [[0, 2], [3, 0]]
     result6 = replace_elements_in_matrix(matrix6, arr6)
-    assert result6 == expected6, f"Ошибка в тесте 6: получено {result6}, ожидалось {expected6}"
+    assert result6 == expected6
 
-    # ---------- Тест 7: повторяющиеся элементы ----------
+    #  повторяющиеся элементы
     matrix7 = [[5, 5], [5, 5]]
     arr7 = [5]
     expected7 = [[0, 5], [5, 0]]
     result7 = replace_elements_in_matrix(matrix7, arr7)
-    assert result7 == expected7, f"Ошибка в тесте 7: получено {result7}, ожидалось {expected7}"
+    assert result7 == expected7
 
-    # ---------- Тест 8: пустой массив arr ----------
+    #  пустой массив
     matrix8 = [[1, 2], [3, 4]]
     arr8 = []
     expected8 = [[1, 2], [3, 4]]
     result8 = replace_elements_in_matrix(matrix8, arr8)
-    assert result8 == expected8, f"Ошибка в тесте 8: получено {result8}, ожидалось {expected8}"
+    assert result8 == expected8
 
-    # ---------- Тест 9: элементы не совпадают ----------
+    #  элементы не совпадают
     matrix9 = [[10, 20], [30, 40]]
     arr9 = [5, 6, 7]
     expected9 = [[10, 20], [30, 40]]
     result9 = replace_elements_in_matrix(matrix9, arr9)
-    assert result9 == expected9, f"Ошибка в тесте 9: получено {result9}, ожидалось {expected9}"
+    assert result9 == expected9
 
-    # ---------- Тест 10: матрица с отрицательными числами ----------
+    #  матрица с отрицательными числами
     matrix10 = [[-1, -2], [-3, -4]]
     arr10 = [-1, -4]
     expected10 = [[0, -2], [-3, 0]]
     result10 = replace_elements_in_matrix(matrix10, arr10)
-    assert result10 == expected10, f"Ошибка в тесте 10: получено {result10}, ожидалось {expected10}"
+    assert result10 == expected10
 
-    print("Все тесты для replace_elements_in_matrix успешно пройдены!")
+    print("Все тесты успешно пройдены!")
 
 
 if __name__ == "__main__":

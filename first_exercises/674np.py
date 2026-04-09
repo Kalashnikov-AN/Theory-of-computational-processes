@@ -1,6 +1,6 @@
 __author__ = "Калашников А.Н."
 
-from arrays import input_or_random_array, get_matrix_order, input_or_random_matrix, apply_replacement
+from arrays import input_or_random_array, get_matrix_order, input_or_random_matrix, replace_elements_in_matrixNP
 
 """
 Задача 674: Даны целые числа a_1, ..., a_10, целочисленная квадратная матрица порядка n.
@@ -16,7 +16,7 @@ if __name__ == "__main__":
     print("\nИсходная матрица:")
     print(matrix)
 
-    result = apply_replacement(matrix, a)
+    result = replace_elements_in_matrixNP(matrix, a)
 
     print("\nМатрица после замены:")
     print(result)

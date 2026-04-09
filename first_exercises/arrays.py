@@ -1,5 +1,6 @@
 __author__ = "Калашников А.Н."
 
+import sys
 from typing import Callable
 import numpy as np
 
@@ -7,6 +8,22 @@ import numpy as np
 Модуль для работы с массивами
 """
 
+HELP_TEXT = f"""\
+Использование: python {{prog}} <число1> <число2> ...
+
+Задача 136 д): вычисляет сумму квадратов переданных чисел
+    Результат: (a_1)^2 + (a_2)^2 + ... + (a_n)^2
+
+Аргументы:
+    <число1> <число2> ...  Набор чисел (целых или дробных)
+
+Параметры:
+    --help                 Показать эту справку и выйти
+
+Примеры:
+    python {{prog}} 1 2 3 4 5
+    python {{prog}} -3.5 2.1 0 7\
+"""
 
 def input_array() -> list[float]:
     """Функция ввода массива пользователем. Пользователь задаёт размер массива.
@@ -118,13 +135,6 @@ def input_or_random_array(size):
 
 
 def input_or_random_matrix(n):
-    """
-    Запрашивает у пользователя ввод квадратной матрицы целых чисел порядка n
-    или генерирует её случайным образом.
-
-    Возвращает:
-        np.ndarray квадратная матрица целых чисел размером n x n.
-    """
     print(f"\nМатрица {n}x{n}:")
     print("  1 - ввести вручную")
     print("  2 - сгенерировать случайно")
@@ -136,20 +146,23 @@ def input_or_random_matrix(n):
         print(matrix)
         return matrix
     else:
-        rows = []
+        matrix = np.empty((n, n), dtype=int)
         print(f"Вводите матрицу построчно ({n} чисел на строку):")
         for i in range(n):
             while True:
                 try:
-                    row = list(map(int, input(f"  Строка {i + 1}: ").split()))
-                    if len(row) != n:
+                    row = np.fromiter(
+                        map(int, input(f"  Строка {i+1}: ").split()),
+                        dtype=int
+                    )
+                    if row.shape != (n,):
                         print(f"  Ошибка: нужно ровно {n} чисел.")
                         continue
-                    rows.append(row)
+                    matrix[i] = row
                     break
                 except ValueError:
                     print("  Ошибка: вводите только целые числа.")
-        return np.array(rows)
+        return matrix
 
 
 def get_matrix_order():
@@ -170,12 +183,39 @@ def get_matrix_order():
             print("Ошибка: введите целое число.")
 
 
-def apply_replacement(matrix, a):
-    """Основная логика замены: заменяет нулями элементы матрицы
-    с чётной суммой индексов, если они присутствуют в массиве a."""
+def replace_elements_in_matrixNP(matrix, a):
+    """Возвращает матрицу с заменёнными нулями элементами из matrix с чётной суммой индексов, для которых имеются равные в массиве a"""
     matrix = matrix.copy()
     rows_idx, cols_idx = np.indices(matrix.shape)
     even_sum_mask = (rows_idx + cols_idx) % 2 == 0
     in_a_mask = np.isin(matrix, a)
     matrix[even_sum_mask & in_a_mask] = 0
     return matrix
+
+
+def sum_square_array(arr: list[float | int]) -> float:
+    """Функция суммирования всех элементов массива arr, возведённых в квадрат."""
+    s = 0
+    for i in range(len(arr)):
+        s += arr[i] ** 2
+    return s
+
+
+def parse_args(args: list[str]) -> list[float]:
+    """Разбирает аргументы командной строки и возвращает список чисел."""
+    prog = sys.argv[0]
+
+    if not args or "--help" in args:
+        print(HELP_TEXT.format(prog=prog))
+        sys.exit(0 if "--help" in args else 1)
+
+    numbers = []
+    for arg in args:
+        try:
+            numbers.append(float(arg))
+        except ValueError:
+            print(f"Ошибка: '{arg}' не является числом.")
+            print(f"Подсказка: запустите 'python {prog} --help' для справки.")
+            sys.exit(1)
+
+    return numbers

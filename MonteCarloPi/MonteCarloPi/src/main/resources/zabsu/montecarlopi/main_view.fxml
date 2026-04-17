@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ProgressBar?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="zabsu.montecarlopi.MainController">
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Вычисление числа pi методом Монте-Карло"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Количество итераций:"/>
+        <TextField fx:id="iterationsField" prefWidth="150"/>
+    </HBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Запуск в основном потоке"
+                onAction="#runInMainThread"/>
+        <Button text="Запуск в отдельном потоке"
+                onAction="#runInBackgroundThread"/>
+        <Button text="Остановить"
+                onAction="#stopComputation"/>
+    </HBox>
+
+    <ProgressBar fx:id="progressBar" prefWidth="400"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Результат:"/>
+        <Label fx:id="resultLabel" text="—"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" text="Готово."/>
+</VBox>

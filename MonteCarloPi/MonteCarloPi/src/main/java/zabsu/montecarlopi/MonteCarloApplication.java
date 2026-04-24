@@ -7,9 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+/**
+ Главный класс приложения
+ */
 public class MonteCarloApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException { // точка входа
         FXMLLoader fxmlLoader = new FXMLLoader(MonteCarloApplication.class.getResource("main_view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setTitle("Monte Carlo PI");

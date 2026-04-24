@@ -59,10 +59,17 @@ public class MonteCarloPi {
                 insideCircle++;
             }
 
-            if (i % 10_000 == 0) {
+            if (i % 10_000 == 0) { //todo: progress 10000
                 progressCallback.accept((double) i / iterations); // передаём результат наружу
             }
         }
+
+        // === ИСПРАВЛЕНИЕ ===
+        // Обновляем прогресс до финального значения после завершения цикла
+        // (1.0 при нормальном завершении, меньше — если остановили)
+        double finalProgress = (iterations > 0) ? (double) i / iterations : 0.0;
+        progressCallback.accept(finalProgress);
+        // ===================
 
         // делим на i (реально выполненные итерации)
         double pi = (i > 0) ? 4.0 * insideCircle / i : 0.0;

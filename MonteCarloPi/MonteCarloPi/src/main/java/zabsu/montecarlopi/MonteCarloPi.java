@@ -51,25 +51,41 @@ public class MonteCarloPi {
         long insideCircle = 0;
         long i = 0; // объявляем снаружи, чтобы знать реальное число итераций после остановки
 
+        /*
+         * Шаг обновления прогресса.
+         */
+        long progressStep = Math.max(iterations / 100, 1);
+
         for (; i < iterations && running; i++) {
+
+            // Генерация случайной точки
             double x = random.nextDouble();
             double y = random.nextDouble();
 
+            // Проверка попадания внутрь четверти круга
             if (x * x + y * y <= 1) {
                 insideCircle++;
             }
 
-            if (i % 10_000 == 0) { //todo: progress 10000
-                progressCallback.accept((double) i / iterations); // передаём результат наружу
+            /**
+             * Обновляем прогресс при достижении
+             * очередного процента выполнения.
+             */
+            if (i % progressStep == 0) {
+
+                // Прогресс в диапазоне [0..1]
+                double progress = (double) i / iterations;
+
+                // Передаём прогресс наружу
+                progressCallback.accept(progress);
             }
         }
 
-        // === ИСПРАВЛЕНИЕ ===
         // Обновляем прогресс до финального значения после завершения цикла
         // (1.0 при нормальном завершении, меньше — если остановили)
         double finalProgress = (iterations > 0) ? (double) i / iterations : 0.0;
-        progressCallback.accept(finalProgress);
-        // ===================
+        progressCallback.accept(finalProgress); //todo: в цикле использовать изменение по одному проценту, для каждого запуска считать 1 процент
+
 
         // делим на i (реально выполненные итерации)
         double pi = (i > 0) ? 4.0 * insideCircle / i : 0.0;

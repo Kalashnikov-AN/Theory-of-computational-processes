@@ -7,12 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Класс приложения численного интегрирования
+ */
 public class IntegrationApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(IntegrationApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(IntegrationApplication.class.getResource("integration-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-        stage.setTitle("Hello!");
+        stage.setTitle("Integration");
         stage.setScene(scene);
         stage.show();
     }

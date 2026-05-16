@@ -1,4 +1,4 @@
-package zabsu.n_threads_integration;
+package zabsu.threads_pool_integration;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

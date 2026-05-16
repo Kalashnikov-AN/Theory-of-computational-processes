@@ -41,12 +41,12 @@ public class IntegrationServiceTest {
     @Test
     void testIntegrateSin() throws InterruptedException {
 
-        IntegrationService service = new IntegrationService();
+        TaskSplitter splitter = new TaskSplitter();
 
         IntegrationModel model =
                 new IntegrationModel(0, Math.PI, 1_000_000, Math::sin);
 
-        double result = service.integrate(model, 4);
+        double result = splitter.computeParallel(model, 4);
 
         assertEquals(2.0, result, 1e-3);
     }
@@ -59,12 +59,12 @@ public class IntegrationServiceTest {
     @Test
     void testIntegrateSquareFunction() throws InterruptedException {
 
-        IntegrationService service = new IntegrationService();
+        TaskSplitter splitter = new TaskSplitter();
 
         IntegrationModel model =
                 new IntegrationModel(0, 1, 1_000_000, x -> x * x);
 
-        double result = service.integrate(model, 8);
+        double result = splitter.computeParallel(model, 8);
 
         assertEquals(1.0 / 3.0, result, 1e-4);
     }
@@ -76,18 +76,18 @@ public class IntegrationServiceTest {
     @Test
     void testDifferentThreadCounts() throws InterruptedException {
 
-        IntegrationService service = new IntegrationService();
+        TaskSplitter splitter = new TaskSplitter();
 
         IntegrationModel model =
                 new IntegrationModel(0, Math.PI, 1_000_000, Math::cos);
 
-        double result1 = service.integrate(model, 1);
+        double result1 = splitter.computeParallel(model, 1);
 
-        double result2 = service.integrate(model, 2);
+        double result2 = splitter.computeParallel(model, 2);
 
-        double result4 = service.integrate(model, 4);
+        double result4 = splitter.computeParallel(model, 4);
 
-        double result8 = service.integrate(model, 8);
+        double result8 = splitter.computeParallel(model, 8);
 
         assertEquals(result1, result2, 1e-6);
 
@@ -95,19 +95,19 @@ public class IntegrationServiceTest {
 
         assertEquals(result1, result8, 1e-6);
     }
- //todo: тест где часть графика выше нуля, а часть графика ниже нуля
+
     /**
      * Проверка работы на большом количестве потоков
      */
     @Test
     void testManyThreads() throws InterruptedException {
 
-        IntegrationService service = new IntegrationService();
+        TaskSplitter splitter = new TaskSplitter();
 
         IntegrationModel model =
                 new IntegrationModel(0, 10, 10_000_000, Math::exp);
 
-        double result = service.integrate(model, 12);
+        double result = splitter.computeParallel(model, 12);
 
         // Точное значение интеграла e^x на [0, 10] равно e^10 - 1
         double exact = Math.exp(10) - 1.0;

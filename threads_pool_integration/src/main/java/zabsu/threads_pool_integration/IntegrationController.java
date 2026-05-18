@@ -22,9 +22,10 @@ public class IntegrationController {
 
 
     /**
-     * Сервис, выполняющий параллельное интегрирование
+     * Экземпляр класса TaskSplitter, разбивающий задачу интегрирования на подзадачи
+     * и выполняющий их параллельно в нескольких потоках
      */
-    private final TaskSplitter splitter = new TaskSplitter(); //todo: комментарий
+    private final TaskSplitter splitter = new TaskSplitter();
 
 
     /**

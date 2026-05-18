@@ -1,6 +1,4 @@
 package zabsu.threads_pool_integration;
-//todo: static computeParallel
-//todo: threadCount больше сделать разница между подходами
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +10,18 @@ import java.util.concurrent.*;
  */
 public class TaskSplitter {
 
+    /// Реализация вычисления частичной суммы
     private final PartialSumCalculator calculator;
 
+    /// Конструктор по умолчанию - использует IntegrationService как реализацию частичной суммы
     public TaskSplitter() {
-        this.calculator = new IntegrationService(); // единственное место, где упоминается конкретный класс
+        this.calculator = new IntegrationService();
     }
 
+    /**
+     * Конструктор с параметрами
+     * @param calculator реализация вычисления частичной суммы
+     */
     public TaskSplitter(PartialSumCalculator calculator) {
         this.calculator = calculator;
     }

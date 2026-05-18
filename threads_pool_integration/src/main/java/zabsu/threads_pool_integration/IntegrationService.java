@@ -1,9 +1,11 @@
 package zabsu.threads_pool_integration;
 
 /**
- * Отвечает за математическую логику численного интегрирования.
+ * Сервис, отвечающий за математическую логику численного интегрирования
  *
- * Не знает ничего о потоках — только вычисляет.
+ * Реализует функицональный интерфейс PartialSumCalculator
+ *
+ * Не знает ничего о потоках — только вычисляет
  */
 public class IntegrationService implements PartialSumCalculator {
 

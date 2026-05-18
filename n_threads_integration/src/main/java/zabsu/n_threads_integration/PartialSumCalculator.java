@@ -1,4 +1,4 @@
-package zabsu.threads_pool_integration;
+package zabsu.n_threads_integration;
 
 /**
  * Интерфейс для вычисления частичной суммы при численном интегрировании
@@ -7,6 +7,7 @@ package zabsu.threads_pool_integration;
  * параллельного интегрирования: вычисление суммы значений функции
  * на заданном участке разбиения</p>
  */
+@FunctionalInterface
 public interface PartialSumCalculator {
 
     /**
